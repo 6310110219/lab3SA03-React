@@ -6,11 +6,12 @@ import WordCard from './WordCard';
 const word = "Hello";
 function App() {
    return (
-      <div class="parent">
+      <div>
          <div>
-            <WordCard value={word}/>
+               <WordCard value={word}/>
          </div>
       </div>
+      
 
  );
 }
