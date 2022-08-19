@@ -52,10 +52,10 @@
   background: pink;
  }
 
- /* .correctCard {
-  color: lightgreen;
-  background: green;
- } */
+ .correctCard {
+  color: green;
+  background: lightgreen;
+ }
 
  .parent {
   text-align: center;

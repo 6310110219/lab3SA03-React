@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
+import WordCard from './WordCard';
+import App from './App';
 
 export default function CharacterCard(props) {
     const [active, setActive] = useState(false);
     const attemptRef = useRef(props.attempt); 
+    const levelRef = useRef(props.level);
     
     const activate = () => {
         if(!active) {
@@ -17,6 +20,10 @@ export default function CharacterCard(props) {
             setActive(false);
             attemptRef.current = props.attempt
         }
+        if(levelRef.current != props.level){
+            setActive(false);
+            levelRef.current = props.level
+        }
     })
        
 
@@ -24,7 +31,10 @@ export default function CharacterCard(props) {
     const className = `card ${active ? 'activeCard': ''}` 
 
     return (
-        <div className={className} onClick={activate}>{props.value}</div>
+        <div className={className}>
+            <div onClick={activate}> {props.value} </div>
+        </div>
+            
     );
  
 }
