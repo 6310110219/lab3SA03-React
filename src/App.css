@@ -106,3 +106,7 @@
 }
 
 .refreshButton:hover {color: red;}
+
+.refreshButton:active {
+  transform: translateY(2px);
+}
