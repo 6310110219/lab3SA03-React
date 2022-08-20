@@ -54,7 +54,7 @@ export default function WordCard(props){
         setState(prepareStateFromWord(props.value[state.level - 1], state.level, state.attempt + 1))
       }
 
-    if(state.level > arrayLength && key == 1) {
+    if(state.level > arrayLength && key == 1) { 
         key = 0;
         for (let i = 0; i < arrayLength; i++) {
             console.log('Level '+ (i+1) + ': attempt = ' + Result[i]);
@@ -64,7 +64,7 @@ export default function WordCard(props){
         setTimeout(function(){
             console.log('completed');
             console.log('RESULT:');
-            alert("Completed!\n\n RESULT:\n" + ResultMessage + "\n\n you can check each level attempt in console.log (F12).");
+            alert("Completed!\n\n RESULT:\n" + ResultMessage + "\n Sum: attempt = "+ Sum + "\n you can check each level attempt in console.log (F12).");
             document.body.innerHTML = 'BYE';
             window.location.reload();
         }, 100); 
