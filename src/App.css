@@ -74,3 +74,35 @@
   word-spacing: 10px;
   margin-top: 1vw;
 }
+.resetButton {
+  margin-top: 5vw;
+  padding: 10px 20px;
+  font-size: 1vw;
+  text-align: center;
+  cursor: pointer;
+  outline: none;
+  color: #fff;
+  background-color: #04AA6D;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 9px #999;
+}
+
+.resetButton:hover {background-color: #3e8e41}
+
+.resetButton:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+.refreshButton {
+  font-size: 0.5vw;
+  color: black;
+  padding: 0;
+  border: none;
+  background: none;
+  margin-left: 1vw;
+}
+
+.refreshButton:hover {color: red;}

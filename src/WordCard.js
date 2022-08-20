@@ -49,6 +49,10 @@ export default function WordCard(props){
         }
 
     }
+    const reset = () => {
+        setState({...state, guess: '', attempt: state.attempt + 1})
+        setState(prepareStateFromWord(props.value[state.level - 1], state.level, state.attempt + 1))
+      }
 
     if(state.level > arrayLength && key == 1) {
         key = 0;
@@ -68,17 +72,24 @@ export default function WordCard(props){
     }
 
     return (
-        <div id = "WordCard">
-            <div>
-                <h1 className='head'>DAYS</h1>
-                <p className='statusbar'>Level: {state.level}&nbsp; &nbsp; Attempt: {state.attempt}</p>
-            </div>
-            <div className='parent'>
+        <div>
+
+            <div className ='parent'>
+                <div>
+                    <h1 className='head'>DAYS</h1>
+                    <p className='statusbar'>Level: {state.level}&nbsp; &nbsp; Attempt: {state.attempt}</p>
+                </div>
                 { 
+                    
                     state.chars.map((c, i) => 
                         <CharacterCard value={c} key={i} activationHandler={activationHandler} level = {state.level} attempt={state.attempt} arrayLength = {arrayLength}/>
                     ) 
                 }
+                <div>
+                    <button className='resetButton' onClick={reset}>RESET</button>
+                    <button className='refreshButton' onClick={() =>window.location.reload()}>REFRESH</button>
+                </div>
+
             </div>
         </div>
     );
