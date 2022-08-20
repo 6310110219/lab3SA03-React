@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
-import App from './App';
 import _, { attempt } from 'lodash';
 const prepareStateFromWord = (given_word, given_level, given_attempt) => {
-
     let word = given_word.toUpperCase()
     let chars = _.shuffle(Array.from(word))
     return {
@@ -17,6 +15,9 @@ const prepareStateFromWord = (given_word, given_level, given_attempt) => {
 }
 
 let Result = [];
+let Sum = 0;
+let key = 1;
+var ResultMessage = [];
 
 export default function WordCard(props){
     let arrayLength = props.value.length;
@@ -49,21 +50,21 @@ export default function WordCard(props){
 
     }
 
-    if(state.level > arrayLength) {
+    if(state.level > arrayLength && key == 1) {
+        key = 0;
+        for (let i = 0; i < arrayLength; i++) {
+            console.log('Level '+ (i+1) + ': attempt = ' + Result[i]);
+            Sum += Result[i];
+            ResultMessage += 'Level '+ (i+1) + ': attempt = ' + Result[i] + '\n';
+        }
         setTimeout(function(){
             console.log('completed');
             console.log('RESULT:');
-            for (let i = 0; i < arrayLength; i++) {
-                console.log('Level '+ i + ': attempt = ' + Result[i]);
-            }
-            alert("Completed!\n you can check attempt in console.log.");
+            alert("Completed!\n\n RESULT:\n" + ResultMessage + "\n\n you can check each level attempt in console.log (F12).");
+            document.body.innerHTML = 'BYE';
             window.location.reload();
         }, 100); 
                 
-   
-        
-
-        // setState({...state, completed: true})
     }
 
     return (

@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 
-
 export default function CharacterCard(props) {
     const [active, setActive] = useState(false);
     const attemptRef = useRef(props.attempt); 
     const levelRef = useRef(props.level);
-    
+    let key = 1;
     const activate = () => {
         if(!active) {
             setActive(true)
@@ -33,6 +32,8 @@ export default function CharacterCard(props) {
     
 
     const className = `card ${active ? 'activeCard': ''}` 
+
+
     return (
             <div id = "CharacterCard" className={className}>
                 <div onClick={activate}> {props.value} </div>
