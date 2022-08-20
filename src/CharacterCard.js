@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import WordCard from './WordCard';
-import App from './App';
+
 
 export default function CharacterCard(props) {
     const [active, setActive] = useState(false);
@@ -26,15 +25,14 @@ export default function CharacterCard(props) {
         }
     })
        
-
-
     const className = `card ${active ? 'activeCard': ''}` 
 
     return (
-        <div className={className}>
-            <div onClick={activate}> {props.value} </div>
-        </div>
-            
+            <div className={className}>
+                <div onClick={activate}> {props.value} </div>
+            </div>
+
+
     );
  
 }

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
 import _, { attempt } from 'lodash';
-import App from './App';
-
 const prepareStateFromWord = (given_word, given_level, given_attempt) => {
+
     let word = given_word.toUpperCase()
     let chars = _.shuffle(Array.from(word))
-
     return {
         word,
         chars,
@@ -32,7 +30,9 @@ export default function WordCard(props){
             if(guess == state.word) {
                 console.log('Yeah!')
                 setState({...state, level: state.level + 1, guess: '', completed: true})
-                setState(prepareStateFromWord(props.value[state.level], state.level + 1, state.attempt))
+                if(state.level < 2) {
+                    setState(prepareStateFromWord(props.value[state.level], state.level + 1, state.attempt))
+                }
             }else{
                 console.log('reset, next attempt')
                 setState({...state, guess: '', attempt: state.attempt + 1})
@@ -40,14 +40,17 @@ export default function WordCard(props){
             }
         }
     }
-    
+        if(state.level > 2) {
+            document.getElementById("WordCard").innerHTML = "";
+        }
+
     return (
-        <div>
-            <div className='statusbar'>
-                <p>Level: {state.level}</p>
-                <p>Attempt: {state.attempt}</p>
+        <div id = "WordCard">
+            <div>
+                <h1 className='head'>DAYS</h1>
+                <p className='statusbar'>Level: {state.level}&nbsp; &nbsp; Attempt: {state.attempt}</p>
             </div>
-            <div className="parent">
+            <div className='parent'>
                 { 
                     state.chars.map((c, i) => 
                         <CharacterCard value={c} key={i} activationHandler={activationHandler} level = {state.level} attempt={state.attempt}/>

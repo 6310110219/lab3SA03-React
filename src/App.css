@@ -52,12 +52,8 @@
   background: pink;
  }
 
- .correctCard {
-  color: green;
-  background: lightgreen;
- }
-
  .parent {
+  display: inline-block;
   text-align: center;
   align-items: center;
   position: absolute;
@@ -66,10 +62,15 @@
   transform: translate(-50%, -50%);
 }
 
+.head {
+  text-align: center;
+  font-size: 6vw;
+  margin: auto;
+}
+
 .statusbar {
-  text-align: right;
+  text-align: center;
+  font-size: 1.5vw;
   word-spacing: 10px;
-  top: 35%;
-  left: 50%;
-  transform: translate(-5%, 10%);
+  margin-top: 1vw;
 }
