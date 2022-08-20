@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import CharacterCard from './CharacterCard';
+import App from './App';
 import _, { attempt } from 'lodash';
 const prepareStateFromWord = (given_word, given_level, given_attempt) => {
 
@@ -15,9 +16,11 @@ const prepareStateFromWord = (given_word, given_level, given_attempt) => {
     }
 }
 
-
+let Result = [];
 
 export default function WordCard(props){
+    let arrayLength = props.value.length;
+
     const [state, setState] = useState(prepareStateFromWord(props.value[0], 1, 1))
 
     const activationHandler = c =>  { 
@@ -25,24 +28,43 @@ export default function WordCard(props){
         
         let guess = state.guess + c
         setState({...state, guess})
+        if(state.level <= arrayLength) {
+            if(guess.length == state.word.length) { 
+                if(guess == state.word) {
+                    console.log('Yeah!')
+                    Result.push(state.attempt)
+                    setState({...state, level: state.level + 1, guess: ''})
+                    if(state.level < arrayLength) {
+                        setState(prepareStateFromWord(props.value[state.level], state.level + 1, 1))
 
-        if(guess.length == state.word.length) { 
-            if(guess == state.word) {
-                console.log('Yeah!')
-                setState({...state, level: state.level + 1, guess: '', completed: true})
-                if(state.level < 2) {
-                    setState(prepareStateFromWord(props.value[state.level], state.level + 1, state.attempt))
+                    }
+                }else{
+                    console.log('reset, next attempt')
+                    setState({...state, guess: '', attempt: state.attempt + 1})
+                    setState(prepareStateFromWord(props.value[state.level - 1], state.level, state.attempt + 1))
                 }
-            }else{
-                console.log('reset, next attempt')
-                setState({...state, guess: '', attempt: state.attempt + 1})
-                setState(prepareStateFromWord(props.value[state.level - 1], state.level, state.attempt + 1))
             }
+            
         }
+
     }
-        if(state.level > 2) {
-            document.getElementById("WordCard").innerHTML = "";
-        }
+
+    if(state.level > arrayLength) {
+        setTimeout(function(){
+            console.log('completed');
+            console.log('RESULT:');
+            for (let i = 0; i < arrayLength; i++) {
+                console.log('Level '+ i + ': attempt = ' + Result[i]);
+            }
+            alert("Completed!\n you can check attempt in console.log.");
+            window.location.reload();
+        }, 100); 
+                
+   
+        
+
+        // setState({...state, completed: true})
+    }
 
     return (
         <div id = "WordCard">
@@ -53,7 +75,7 @@ export default function WordCard(props){
             <div className='parent'>
                 { 
                     state.chars.map((c, i) => 
-                        <CharacterCard value={c} key={i} activationHandler={activationHandler} level = {state.level} attempt={state.attempt}/>
+                        <CharacterCard value={c} key={i} activationHandler={activationHandler} level = {state.level} attempt={state.attempt} arrayLength = {arrayLength}/>
                     ) 
                 }
             </div>

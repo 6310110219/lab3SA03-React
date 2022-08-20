@@ -3,8 +3,8 @@ import './App.css';
 import CharacterCard from './CharacterCard';
 import WordCard from './WordCard';
 
-const words = ["hi","by"];
-// ["Hello", "Java", "JavaScript", "Python", "C++", "PHP"];
+const words = ["hi","by","he"];
+// ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 function App() {
 
    return (
